@@ -1,5 +1,6 @@
 
   Subroutine     Str2Real8_Sub(OutPut,This) 
+    USE, INTRINSIC :: IEEE_ARITHMETIC
     Implicit None 
     Real(8)         , Intent(Out)            :: OutPut
     Class(Str)      , Intent(In)             :: This
@@ -13,7 +14,7 @@
     ! If it Is Numeric convert the number else set output equal to NaN
     
     If (This%IsNumeric()) Then ; Read(String,'(f16.8)'   ) OutPut
-    Else                       ; OutPut = 0.d0 ; OutPut = 0.d0/OutPut
+    Else                       ; OutPut = IEEE_VALUE(OutPut, IEEE_SIGNALING_NAN)
     End If
 
 
@@ -26,6 +27,7 @@
   End Subroutine Str2Real8_Sub
 
   Subroutine     Str2Int_Sub  (OutPut,This)
+      USE, INTRINSIC :: IEEE_ARITHMETIC
       Implicit None 
       Integer         , Intent(Out)            :: OutPut
       Class(Str)      , Intent(In)             :: This
@@ -35,15 +37,19 @@
 
       String = Trim(Adjustl(This%Name))
 
-      If(This%Count("0.")/=0) Then
-      OutPut = 0 ; OutPut = 0/OutPut
+      If(This%Count(".") /=0 .or. &
+         This%Count("D") /=0 .or. &
+         This%Count("d") /=0 .or. &
+         This%Count("E") /=0 .or. &
+         This%Count("e") /=0) Then
+      OutPut = IEEE_VALUE(1.d0, IEEE_SIGNALING_NAN)
       Return
       End If 
 
 
 
       If(This%IsNumeric()) Then ; Read(String,'(i8.8)' ) OutPut
-      Else                      ; OutPut = 0 ; OutPut = 0/OutPut
+      Else                      ; OutPut = IEEE_VALUE(1.d0, IEEE_SIGNALING_NAN)
       End If 
   End Subroutine Str2Int_Sub
 
@@ -94,4 +100,32 @@
       Else                      ; Read(This%Name,'(i8.8)' ) OutPut
       End If
   End Function   Str2Int
+
+
+  Subroutine     Int2Str_Sub  (This,InPut)
+      USE, INTRINSIC :: IEEE_ARITHMETIC
+      Implicit None 
+      Class(Str)      , Intent(Out)           :: This
+      Integer         , Intent(In)            :: InPut
+      Character(len=DefaultLen)               :: String
+
+
+      Write(String,'(i8)' ) InPut
+      This = Trim(Adjustl(String))
+      
+  End Subroutine Int2Str_Sub
+
+
+  Subroutine     Double2Str_Sub  (This,InPut)
+      USE, INTRINSIC :: IEEE_ARITHMETIC
+      Implicit None 
+      Class(Str)      , Intent(Out)           :: This
+      Real(8)         , Intent(In)            :: InPut
+      Character(len=DefaultLen)               :: String
+
+
+      Write(String,'(f20.8)' ) InPut
+      This = Trim(Adjustl(String))
+      
+  End Subroutine Double2Str_Sub
 

@@ -19,24 +19,32 @@
     Type (Str), Intent(In)                            :: Pattern
     Type (Str), Dimension(:),Allocatable              :: OutPut
 
-    Integer                              :: i
-    Integer                              :: L
-    Integer                              :: U
-    Integer                              :: BraKet    
-    Integer                              :: LenBraKet
-    Integer  , Dimension(:), Allocatable :: PP 
-    Type(Str), Dimension(:), Allocatable :: Sub
+    Type (Str)                                        :: Working
+    Type (Str)                                        :: WorkingPattern
+    Integer                                           :: i
+    Integer                                           :: L
+    Integer                                           :: U
+    Integer                                           :: BraKet    
+    Integer                                           :: LenBraKet
+    Integer  , Dimension(:), Allocatable              :: PP 
+    Type(Str), Dimension(:), Allocatable              :: Sub
+
+    ! I found a bug in the FindPattern_Str Could not analyze the Pattern like 
+    ! "Abc Test1 def Test2" where Pattern = "Abc {} def {}" where {} are at the end 
+    ! of the string so I add the TestWork sting which is the Word TestWork at MD5 format
+
+    Working        = This    // TestWork
+    WorkingPattern = Pattern // TestWork
 
 
-
-    BraKet    = Pattern%Count("{}")
+    BraKet    = WorkingPattern%Count("{}")
     LenBraKet = len("{}") 
 
 
     Allocate(PP  (BraKet  )) ; PP      = 0 ! Temporary Solution
     Allocate(Sub (BraKet+1))
 
-    PP  = Pattern%Find  ("{}")  ! Find The Position of BraKet
+    PP  = WorkingPattern%Find  ("{}")  ! Find The Position of BraKet
 
 
 
@@ -46,12 +54,12 @@
       Else                   ; L = PP(i-1) + LenBraKet 
       End if
 
-      If (i==Size(Sub)) Then ; U = len(Pattern)
+      If (i==Size(Sub)) Then ; U = len(WorkingPattern)
       Else                   ; U = PP(i)-1
       End If
 
 
-      Sub(i)= Pattern%Name(L:U)
+      Sub(i)= WorkingPattern%Name(L:U)
 
     End Do
 
@@ -63,16 +71,105 @@
 
     Do i = 1, Size(Sub)-1
       If   (i==1) Then ; L =                         1 + len(Sub(i))
-      Else             ; L = This%FindOne(Sub(i)%Name) + len(Sub(i))
+      Else             ; L = Working%FindOne(Sub(i)%Name) + len(Sub(i))
       End If 
 
-      U = This%FindOne(Sub(i+1)%Name) - 1
+      U = Working%FindOne(Sub(i+1)%Name) - 1
 
-      OutPut(i) = This%Name(L:U)
+      OutPut(i) = Working%Name(L:U)
 
     End Do 
   End Function   FindPattern_Str
   
+
+
+
+  Function       Left_Str_Right_Str_Addition (This,Value) Result(OutPut)
+    Implicit None
+    Class(Str)      , Intent(In) :: This
+    Type (Str)      , Intent(In) :: Value
+    Type (Str)                   :: OutPut    
+
+    Type(Str)                    :: Work
+    Character(len=DefaultLen)    :: Wnum = ''
+    Real(8)                      :: Wval
+    Integer                      :: Bra
+    Integer                      :: ket
+    Character(len=:),allocatable :: Fmt
+    Character(len=:),allocatable :: Num
+
+
+
+    Work = This
+
+
+    Bra  = Work%FindOne("{")
+    ket  = Work%FindOne("}")
+
+    Fmt  = Trim(Adjustl(Work%Name(Bra+1:Ket-1)))
+
+
+    Num  = Trim(Adjustl(Wnum))
+
+    If      (ket == Bra + 1 ) Then  ; Work = Work%Replace("{}"              ,Value%Name,1)
+    Else If (Ket >  Bra + 1 ) Then  ; Work = Work%Replace(Work%Name(Bra:Ket),Value%Name,1)
+    End  If
+    
+    OutPut = Work
+  End Function   Left_Str_Right_Str_Addition
+
+
+  Function       Left_Char_Right_Str_Addition (Ch,Value) Result(OutPut)
+    Implicit None
+    Character(len=*), Intent(In) :: Ch
+    Type (Str)      , Intent(In) :: Value
+    Type (Str)                   :: OutPut    
+
+    Type(Str)                    :: Work
+    Character(len=DefaultLen)    :: Wnum = ''
+    Real(8)                      :: Wval
+    Integer                      :: Bra
+    Integer                      :: ket
+    Character(len=:),allocatable :: Fmt
+    Character(len=:),allocatable :: Num
+
+
+
+    Work = Ch
+
+
+    Bra  = Work%FindOne("{")
+    ket  = Work%FindOne("}")
+
+    Fmt  = Trim(Adjustl(Work%Name(Bra+1:Ket-1)))
+
+
+    Num  = Trim(Adjustl(Wnum))
+
+    If      (ket == Bra + 1 ) Then  ; Work = Work%Replace("{}"              ,Value%Name,1)
+    Else If (Ket >  Bra + 1 ) Then  ; Work = Work%Replace(Work%Name(Bra:Ket),Value%Name,1)
+    End  If
+    
+    OutPut = Work
+  End Function   Left_Char_Right_Str_Addition
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   Function       Left_Str_Right_Real8 (This,Value) Result(OutPut)
     Implicit None

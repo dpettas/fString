@@ -22,9 +22,6 @@
 
     If ( End_- Start_ > LenSub ) End_   = Start_ + LenSub
 
-
-
-
     OutPut= This%Name(Start_:End_)==Sub
   End Function   StartsWith
 

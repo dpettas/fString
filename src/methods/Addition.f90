@@ -40,6 +40,6 @@
     Type (Str)                   :: OutPut    
 
 
-    OutPut%Name = This%Name + Str2%Name
+    OutPut%Name = This%Name//Str2%Name
   End Function   Add_Left_Str_Right_Str
 

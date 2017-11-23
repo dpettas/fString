@@ -6,13 +6,13 @@
     Character(*)    , Intent(In)      :: IOTYPE
     Integer         , Intent(In)      :: V_LIST (:)
     Integer         , Intent(Out)     :: IOSTAT
-    CHARACTER(*)    , Intent(InOut)   :: IOMSG
+    Character(*)    , Intent(InOut)   :: IOMSG
     Character(len=:), Allocatable     :: Temp
 
 
     Allocate(Temp,Source=This%Name)
-  
-    WRITE (UNIT, FMT='(a)', IOSTAT=IOSTAT, IOMSG=IOMSG) Temp
+    
+    Write (UNIT, FMT='(a)', IOSTAT=IOSTAT, IOMSG=IOMSG) Temp
 
     DeAllocate(Temp)
   End SUBROUTINE WriteStrUDIO

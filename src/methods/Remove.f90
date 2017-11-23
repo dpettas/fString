@@ -36,7 +36,7 @@
 
     Pos  = Temp%FindOne(Char)
     Do While (Pos/=0)
-    Temp = Temp%Name(1:Pos-1) + Temp%Name(Pos+LenChar:Len(Temp))
+    Temp = Temp%Name(1:Pos-1) // Temp%Name(Pos+LenChar:Len(Temp))
     Pos  = Temp%FindOne(Char)
     End Do 
 

@@ -5,10 +5,10 @@
 
     Class(Str)  , Intent(InOut)      :: This
     Integer     , Intent(In)         :: UNIT
-    CHARACTER(*), Intent(In)         :: IOTYPE
+    Character(*), Intent(In)         :: IOTYPE
     INTEGER     , Intent(In)         :: V_LIST (:)
     INTEGER     , Intent(Out)        :: IOSTAT
-    CHARACTER(*), Intent(InOut)      :: IOMSG
+    Character(*), Intent(InOut)      :: IOMSG
 
     Character(len=10000)             :: Temp
 

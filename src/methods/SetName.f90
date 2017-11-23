@@ -1,3 +1,10 @@
+
+
+#ifndef SETNAME_
+#define SETNAME_
+
+
+
   Subroutine     SetName(This,Name)
     ! Import Str 
     Character(len=*), Intent(In)          :: Name
@@ -5,4 +12,6 @@
 
     This%Name  = Name
 
-    End Subroutine SetName 
+  End Subroutine SetName 
+  
+#endif

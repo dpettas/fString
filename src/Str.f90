@@ -113,7 +113,7 @@ Module fString
 
 
   Interface  Operator(+)
-    Module Procedure :: Add_Left_Char_Right_Char 
+    Module Procedure :: Left_Char_Right_Str_Addition
     Module Procedure :: Left_Char_Right_Real8
     Module Procedure :: Left_Char_Right_Integer
   End Interface
@@ -155,9 +155,13 @@ Module fString
     Procedure                      :: Replace
     Procedure                      :: CutSpaces
     Procedure                      :: Split
-    
-    Procedure, Private             :: FindPattern_Str
-    Procedure, Private             :: FindPattern_Char
+    Procedure                      :: Colorize
+    Procedure                      :: WriteStrUDIO
+    Procedure                      :: ReadStrUDIO
+
+
+    Procedure, Private, Pass(This) :: FindPattern_Str
+    Procedure, Private, Pass(This) :: FindPattern_Char
 
     Procedure, Private, Pass(This) :: Remove_Char
     Procedure, Private, Pass(This) :: Remove_Str
@@ -165,41 +169,58 @@ Module fString
     Procedure, Private, Pass(This) :: Str2Char_Sub
     Procedure, Private, Pass(This) :: Str2Real8_Sub
     Procedure, Private, Pass(This) :: Str2Int_Sub
+    Procedure, Private, Pass(This) :: Int2Str_Sub
+    Procedure, Private, Pass(This) :: Double2Str_Sub
+
+
     Procedure, Private, Pass(This) :: Multiplicity_Right_Int
     Procedure, Private, Pass(This) :: Multiplicity_Left_Int
     Procedure, Private, Pass(This) :: Add_Left_Str_Right_Char
     Procedure, Private, Pass(This) :: Add_Left_Char_Right_Str
     Procedure, Private, Pass(This) :: Add_Left_Str_Right_Str
+
     Procedure, Private, Pass(This) :: Left_Str_Right_Real8
     Procedure, Private, Pass(This) :: Left_Str_Right_Integer
+    Procedure, Private, Pass(This) :: Left_Str_Right_Str_Addition
+
+    Procedure, Private, Pass(This) :: BooleanEqual_Str
+    Procedure, Private, Pass(This) :: BooleanEqual_Char
+    Procedure, Private, Pass(This) :: BooleanNotEqual_Str
+    Procedure, Private, Pass(This) :: BooleanNotEqual_Char
 
 
 
+    Procedure                      :: Help
 
-    ! I/O Procedure Only for Ifort Up to Now 
-    ! User Defined Derived Types I/O (U.D. I/O)
-    ! Procedure                      :: Write_Str_UDIO
-    Generic                        :: Remove        => Remove_Char, Remove_Str
+    Generic                        :: Remove           => Remove_Char, Remove_Str
+    Generic                        :: Pattern          => FindPattern_Str          , &
+                                                          FindPattern_Char
+    Generic                        :: Assignment(=)    => SetName                  , &
+                                                          Str2Real8_Sub            , &
+                                                          Str2Int_Sub              , &
+                                                          Str2Char_Sub             , &
+                                                          Int2Str_Sub              , &
+                                                          Double2Str_Sub
 
-    Generic                        :: Pattern       => FindPattern_Str          , &
-                                                       FindPattern_Char
+                                                          
+    Generic                        :: Operator  (*)    => Multiplicity_Right_Int   , &
+                                                          Multiplicity_Left_Int
 
-    Generic                        :: Assignment(=) => SetName                  , &
-                                                       Str2Real8_Sub            , &
-                                                       Str2Int_Sub              , &
-                                                       Str2Char_Sub
-    Generic                        :: Operator  (*) => Multiplicity_Right_Int   , &
-                                                       Multiplicity_Left_Int
- 
-    Generic                        :: Operator  (+) => Add_Left_Str_Right_Char  , &
-                                                       Add_Left_Char_Right_Str  , &
-                                                       Add_Left_Str_Right_Str   , &
-                                                       Left_Str_Right_Real8     , &
-                                                       Left_Str_Right_Integer
+    Generic                        :: Operator  (//)   => Add_Left_Str_Right_Char  , &
+                                                          Add_Left_Char_Right_Str  , &
+                                                          Add_Left_Str_Right_Str   
 
 
+    Generic                        :: Operator  (+)    => Left_Str_Right_Real8       , &
+                                                          Left_Str_Right_Integer     , &
+                                                          Left_Str_Right_Str_Addition
 
-    ! Generic                        :: Write(Formatted) =>  Write_Str_UDIO                                                     
+    Generic                        :: Operator (==)    => BooleanEqual_Str   , BooleanEqual_Char
+    Generic                        :: Operator (/=)    => BooleanNotEqual_Str, BooleanNotEqual_Char
+
+
+    Generic                        :: Write(Formatted) =>  WriteStrUDIO                                                     
+    Generic                        :: Read (Formatted) =>  ReadStrUDIO
   End Type Str
 
   !************************************************************************************************
@@ -211,6 +232,7 @@ Module fString
   Character( * ), Parameter, Private :: DefaultFormat   = 'F10.4'
   Character( * ), Parameter, Private :: DefaultIntFmt   = 'i10'
   Integer       , Parameter, Private :: DefaultLen      = 1000
+  Character( * ), Parameter, Private :: TestWork        = '244ce1fc9a52932f9c06d534a8f4d733' !(MD5 format)
 
 
   Contains 
@@ -219,7 +241,104 @@ Module fString
   !                           Include Files
   !<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
+
+  Subroutine Help(This,Unit,Search)
+    Implicit None 
+    Class(Str)                               :: This
+    Integer         , Intent(In), Optional   :: Unit
+    Character(len=*), Intent(In), Optional   :: Search
+
+    Integer                                  :: Unit_
+
+    ! Methods
+    Integer  , Parameter                     :: NumMethod = 21
+    Type(Str), Dimension(NumMethod)          :: Method_
+    Type(Str)                                :: MethodDummy
+
+    Type(Str)                                :: MethodName
+    Integer                                  :: I
+    Logical                                  :: MethodExist
+    
+
+
+    If  ( Present(Unit) ) Then ; Unit_ = Unit
+    Else                       ; Unit_ = 6 
+    End If 
+
+    MethodExist = Present(Search)
+
+    If (MethodExist) Then ; MethodName = Search ; MethodName = MethodName%LowerCase()
+    End If 
+
+    I = 0
+    I = I + 1 ;Method_(I)  =  "(Function)  UpperCase  : <Type Str>               = <Type Str>%UpperCase   ()"
+    I = I + 1 ;Method_(I)  =  "(Function)  LowerCase  : <Type Str>               = <Type Str>%LowerCase   ()"
+    I = I + 1 ;Method_(I)  =  "(Function)  Count      : <Integer >               = <Type Str>%Count       (Sub (Character len(*)),Start (Integer,Optional), End (Integer,Optional))"
+    I = I + 1 ;Method_(I)  =  "(Function)  Reverse    : <Type Str>               = <Type Str>%Reverse     ()"
+    I = I + 1 ;Method_(I)  =  "(Function)  IsDigit    : <Logical >               = <Type Str>%IsDigit     ()"
+    I = I + 1 ;Method_(I)  =  "(Function)  IsAlpha    : <Logical >               = <Type Str>%IsAlpha     ()"
+    I = I + 1 ;Method_(I)  =  "(Function)  IsNumeric  : <Logical >               = <Type Str>%IsNumeric   ()"
+    I = I + 1 ;Method_(I)  =  "(Function)  StartsWith : <Logical >               = <Type Str>%StartsWith  (Sub (Character len(*)),Start (Integer,Optional), End (Integer,Optional))"
+    I = I + 1 ;Method_(I)  =  "(Function)  EndsWith   : <Logical >               = <Type Str>%EndsWith    (Sub (Character len(*)),Start (Integer,Optional), End (Integer,Optional))"
+    I = I + 1 ;Method_(I)  =  "(Function)  FindOne    : <Integer >               = <Type Str>%FindOne     (Sub (Character len(*)),Start (Integer,Optional), End (Integer,Optional))"
+    I = I + 1 ;Method_(I)  =  "(Function)  Find       : <Integer >               = <Type Str>%Find        (Sub (Character len(*)),Start (Integer,Optional), End (Integer,Optional))"
+    I = I + 1 ;Method_(I)  =  "(Function)  Replace    : <Type Str>               = <Type Str>%Replace     (Old (Character len(*)),New   (Character len(*)), Max (Integer,Optional))"
+    I = I + 1 ;Method_(I)  =  "(Function)  CutSpaces  : <Type Str>               = <Type Str>%CutSpaces   ()"
+    I = I + 1 ;Method_(I)  =  "(Function)  Split      : <Type Str, Dimension(:)> = <Type Str>%Split       (Sep     (Character len(*)))             "
+    I = I + 1 ;Method_(I)  =  "(Function)  Pattern    : <Type Str, Dimension(:)> = <Type Str>%Pattern     (Pattern (Character len(*) or Type Str ))"
+    I = I + 1 ;Method_(I)  =  "(Function)  Remove     : <Type Str>               = <Type Str>%Remove      (Char    (Character len(*) or Type Str)))"
+
+    I = I + 1 ;Method_(I)  =  "(Operator) <Type Str> =  <Integer>  * <Type Str> or  <Type Str> *  <Integer>"
+    I = I + 1 ;Method_(I)  =  "(Operator) <Type Str> =  <Type Str or Character> + <Type Str> or  <Real(8)> or  <Integer> or <Type Str>"
+    I = I + 1 ;Method_(I)  =  "(Operator) <Type Str> =  <Type Str or Character> // <Type Str or Character>"
+    I = I + 1 ;Method_(I)  =  "(Operator) <Type Str> == <Type Str>              or  <Type Str> == Char(len=*)"
+
+
+!<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+!   Loop Over the Methods 
+!<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    Do i = 1, NumMethod
+
+    !<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    ! If the Unit == 6 (print) then Colorize the reusults else 
+    ! leave it white
+    !<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
+    If (Unit_== 6) Then 
+    Method_(i) = Method_(i)%Colorize("(Function)","Red   Bold")
+    Method_(i) = Method_(i)%Colorize("(Operator)","Green Bold")
+    Method_(i) = Method_(i)%Colorize("Optional"  ,"      Bold")
+    End If 
+
+    !<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    ! If Search exists then 
+    !<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
+    MethodDummy = Method_(i)%LowerCase()
+    If (MethodExist ) Then
+      
+
+      If (MethodDummy%FindOne( MethodName%Name ) /= 0 ) Then 
+      Write(Unit_,'(dt)') Method_(i)
+      End If 
+      
+    Else
+    Write(Unit_,'(dt)') Method_(i)
+    End If 
+    
+    
+    
+
+    End Do 
+
+  End Subroutine Help 
+
+
+
+
+
 # include "./methods/SetName.f90"
+
 # include "./methods/UpperCase.f90"
 # include "./methods/LowerCase.f90"
 # include "./methods/Addition.f90"
@@ -238,7 +357,13 @@ Module fString
 # include "./methods/CutSpaces.f90"
 # include "./methods/Len_Str.f90"
 # include "./methods/FindPattern.f90"
+# include "./methods/Colorize.f90"
 # include "./methods/Remove.f90"
+# include "./methods/Read.f90"
+# include "./methods/Write.f90"
+# include "./methods/BooleanEQV.f90"
+# include "./methods/BooleanNEQV.f90"
+
 
 End Module fString
 

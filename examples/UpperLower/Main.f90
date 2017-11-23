@@ -4,7 +4,6 @@
 
 Program Main 
 
-
   Use fString
   Implicit None
   !define the New Object of the Class Str from the module fString
