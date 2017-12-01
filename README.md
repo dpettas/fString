@@ -18,7 +18,26 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 
 + [x] UpperCase
 + [x] LowerCase
-+ [x] UpperCase
++ [x] Count
++ [x] Reverse
++ [x] IsDigit
++ [x] IsAlpha
++ [x] IsNumeric
++ [x] StartsWith
++ [x] EndsWith 
++ [x] Find
++ [x] Replace
++ [x] CutSpaces
++ [x] Split
++ [x] Pattern
++ [x] Remove
+
+# Operators
++ Multiply Integer with Type(Str)
++ Addition a Type(Str) with Real number or Integer and vice versa
++ Assignment a Type(Str) with a Real number of Integer and vice versa
++ Merge a Type(Str) with a Character or another Type(Str) (//)
++ Boolean equilivalent (==) of a Type(Str) or Character
 
 # How to use fString
 
