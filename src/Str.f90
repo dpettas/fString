@@ -110,7 +110,7 @@ Module fString
   !                                  DEFINE INTERFACES
   !
   !************************************************************************************************
-
+[![Status](https://img.shields.io/badge/status-stable-brightgreen.svg)]()
 
   Interface  Operator(+)
     Module Procedure :: Left_Char_Right_Str_Addition

@@ -2,8 +2,8 @@
 
 
 
-COMPILER  = INTEL
-#COMPILER=GNU
+#COMPILER  = INTEL
+COMPILER=GNU
 
 
 GFFLAGS = -cpp -O3 -g -m64 -fcray-pointer -ffree-line-length-none 
