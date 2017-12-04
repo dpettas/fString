@@ -21,10 +21,10 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 + [x] [Reverse](https://github.com/dpettas/fString/wiki/Reverse)
 + [x] [Replace](https://github.com/dpettas/fString/wiki/Replace)
 + [x] [Remove](https://github.com/dpettas/fString/wiki/Remove)
++ [x] [IsDigit](https://github.com/dpettas/fString/wiki/IsDigit-IsNumeric-IsAlpha/_edit)
++ [x] [IsAlpha](https://github.com/dpettas/fString/wiki/IsDigit-IsNumeric-IsAlpha/_edit)
++ [x] [IsNumeric](https://github.com/dpettas/fString/wiki/IsDigit-IsNumeric-IsAlpha/_edit)
 + [x] Count
-+ [x] IsDigit
-+ [x] IsAlpha
-+ [x] IsNumeric
 + [x] StartsWith
 + [x] EndsWith 
 + [x] Find
