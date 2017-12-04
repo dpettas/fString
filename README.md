@@ -21,9 +21,9 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 + [x] [Reverse](https://github.com/dpettas/fString/wiki/Reverse)
 + [x] [Replace](https://github.com/dpettas/fString/wiki/Replace)
 + [x] [Remove](https://github.com/dpettas/fString/wiki/Remove)
-+ [x] [IsDigit](https://github.com/dpettas/fString/wiki/IsDigit-IsNumeric-IsAlpha/_edit)
-+ [x] [IsAlpha](https://github.com/dpettas/fString/wiki/IsDigit-IsNumeric-IsAlpha/_edit)
-+ [x] [IsNumeric](https://github.com/dpettas/fString/wiki/IsDigit-IsNumeric-IsAlpha/_edit)
++ [x] [IsDigit](https://github.com/dpettas/fString/wiki/IsDigit-IsNumeric-IsAlpha)
++ [x] [IsAlpha](https://github.com/dpettas/fString/wiki/IsDigit-IsNumeric-IsAlpha)
++ [x] [IsNumeric](https://github.com/dpettas/fString/wiki/IsDigit-IsNumeric-IsAlpha)
 + [x] Count
 + [x] StartsWith
 + [x] EndsWith 
