@@ -1,5 +1,5 @@
 
-# fString [![License](https://img.shields.io/badge/license-MIT-red.svg)]()
+# fString [![License](https://img.shields.io/badge/license-GNU%20GeneraL%20Public%20License%20v3,%20GPLv3-blue.svg)]()
 
 
 - fString is a pure Object-Oriented fortran library that provides String objects 
