@@ -17,16 +17,16 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 
 
 + [x] [UpperCase](https://github.com/dpettas/fString/wiki/UpperCase-LowerCase) 
-+ [x] LowerCase
++ [x] [LowerCase](https://github.com/dpettas/fString/wiki/UpperCase-LowerCase)
++ [x] [Reverse](https://github.com/dpettas/fString/wiki/Reverse)
++ [x] [Replace](https://github.com/dpettas/fString/wiki/Replace)
 + [x] Count
-+ [x] Reverse
 + [x] IsDigit
 + [x] IsAlpha
 + [x] IsNumeric
 + [x] StartsWith
 + [x] EndsWith 
 + [x] Find
-+ [x] Replace
 + [x] CutSpaces
 + [x] Split
 + [x] Pattern
