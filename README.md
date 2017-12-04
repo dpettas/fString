@@ -30,7 +30,7 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 + [x] [Find](https://github.com/dpettas/fString/wiki/Find)
 + [x] [CutSpaces](https://github.com/dpettas/fString/wiki/CutSpaces)
 + [x] [Split](https://github.com/dpettas/fString/wiki/Split)
-+ [x] Pattern
++ [x] [Pattern](https://github.com/dpettas/fString/wiki/Pattern)
 
 
 # Operators
