@@ -27,7 +27,7 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 + [x] [Count](https://github.com/dpettas/fString/wiki/Count)
 + [x] [StartsWith](https://github.com/dpettas/fString/wiki/StartsWith-EndsWith)
 + [x] [EndsWith](https://github.com/dpettas/fString/wiki/StartsWith-EndsWith)
-+ [x] Find
++ [x] [Find](https://github.com/dpettas/fString/wiki/Find)
 + [x] CutSpaces
 + [x] Split
 + [x] Pattern
