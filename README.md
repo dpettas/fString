@@ -20,6 +20,7 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 + [x] [LowerCase](https://github.com/dpettas/fString/wiki/UpperCase-LowerCase)
 + [x] [Reverse](https://github.com/dpettas/fString/wiki/Reverse)
 + [x] [Replace](https://github.com/dpettas/fString/wiki/Replace)
++ [x] [Remove](https://github.com/dpettas/fString/wiki/Remove)
 + [x] Count
 + [x] IsDigit
 + [x] IsAlpha
@@ -30,7 +31,7 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 + [x] CutSpaces
 + [x] Split
 + [x] Pattern
-+ [x] Remove
+
 
 # Operators
 + Multiply Integer with Type(Str)
