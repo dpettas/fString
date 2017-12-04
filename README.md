@@ -25,8 +25,8 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 + [x] [IsAlpha](https://github.com/dpettas/fString/wiki/IsDigit-IsNumeric-IsAlpha)
 + [x] [IsNumeric](https://github.com/dpettas/fString/wiki/IsDigit-IsNumeric-IsAlpha)
 + [x] [Count](https://github.com/dpettas/fString/wiki/Count)
-+ [x] StartsWith
-+ [x] EndsWith 
++ [x] [StartsWith](https://github.com/dpettas/fString/wiki/StartsWith-EndsWith)
++ [x] [EndsWith](https://github.com/dpettas/fString/wiki/StartsWith-EndsWith)
 + [x] Find
 + [x] CutSpaces
 + [x] Split
