@@ -40,8 +40,8 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 # Operators
 + Multiply Integer with Type(Str)                                    => [example](https://github.com/dpettas/fString/wiki/Multiply-Integet-with-Type(Str))
 + Assignment a Type(Str) with a Real number or Integer and vice versa => [example](https://github.com/dpettas/fString/wiki/Assignment-Operator)
-+ Addition a Type(Str) with Real number or Integer and vice versa
 + Merge a Type(Str) with a Character or another Type(Str) (//)
++ Addition a Type(Str) with Real number or Integer and vice versa
 + Boolean equilivalent (==) of a Type(Str) or Character
 
 
