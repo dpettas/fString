@@ -16,7 +16,7 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 # Methods 
 
 
-+ [x] UpperCase
++ [x] [UpperCase](https://github.com/dpettas/fString/wiki/UpperCase-LowerCase) 
 + [x] LowerCase
 + [x] Count
 + [x] Reverse
