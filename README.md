@@ -1,7 +1,5 @@
 
-# fString
-[![License](https://img.shields.io/badge/license-MIT-red.svg)]()
-
+# fString [![License](https://img.shields.io/badge/license-MIT-red.svg)]()
 
 
 - fString is a pure Object-Oriented fortran library that provides String objects 
@@ -9,7 +7,13 @@
 - fString is OOP designed
 - fString is a free Open Source Library 
 
-# Why use fString
+## Compiler Support
+[![Compiler](https://img.shields.io/badge/GNU-pass%20(v7.0.1+)-brightgreen.svg)]()
+[![Compiler](https://img.shields.io/badge/Intel-pass%20(v17.x+)-brightgreen.svg)]()
+[![Compiler](https://img.shields.io/badge/IBM%20XL-not%20tested-yellow.svg)]()
+[![Compiler](https://img.shields.io/badge/PGI-not%20tested-yellow.svg)]()
+
+## Why use fString
 
 Modern Fortran has introduced the Object-Oriented Standard. Using these type of Derived types as long as the User-defined Input Output it is possible to create classes to integrate the usage of the Fortran. In the Fortran, by default, there is a lack of classes to reduce the dummy code that we are using. fString is an integration of Characters, which are replaced with the Type(Str). Basically, Type(Str) is a Fortran Alpharithmetic equipped with some methods for the better usage of these Strings.
 
@@ -39,4 +43,6 @@ Modern Fortran has introduced the Object-Oriented Standard. Using these type of 
 + Assignment a Type(Str) with a Real number of Integer and vice versa
 + Merge a Type(Str) with a Character or another Type(Str) (//)
 + Boolean equilivalent (==) of a Type(Str) or Character
+
+
 
