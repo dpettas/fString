@@ -8,8 +8,8 @@
 - fString is a free Open Source Library 
 
 ## Compiler Support
-[![Compiler](https://img.shields.io/badge/GNU-pass%20(v7.0.1+)-brightgreen.svg)]()
-[![Compiler](https://img.shields.io/badge/Intel-pass%20(v17.x+)-brightgreen.svg)]()
+[![Compiler](https://img.shields.io/badge/GNU-pass%20(v7+)-brightgreen.svg)]()
+[![Compiler](https://img.shields.io/badge/Intel-pass%20(v17+)-brightgreen.svg)]()
 [![Compiler](https://img.shields.io/badge/IBM%20XL-not%20tested-yellow.svg)]()
 [![Compiler](https://img.shields.io/badge/PGI-not%20tested-yellow.svg)]()
 
