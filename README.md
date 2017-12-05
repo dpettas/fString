@@ -15,8 +15,13 @@
 
 ## Why use fString
 
-Modern Fortran has introduced the Object-Oriented Standard. Using these type of Derived types as long as the User-defined Input Output it is possible to create classes to integrate the usage of the Fortran. In the Fortran, by default, there is a lack of classes to reduce the dummy code that we are using. fString is an integration of Characters, which are replaced with the Type(Str). Basically, Type(Str) is a Fortran Alpharithmetic equipped with some methods for the better usage of these Strings.
+Fortran 2003+ standards introduce the Generic Programming in classic Fortran. The Object-Oriented turn, in this language, allows us to build classes to make our code more clear with less dummy code.
 
+fString is one of these modules which is an enhancement of the classical Fortran Characters. 
+
+fString contains methods to add strings to values or split the context 
+of a string of more than one substrings or even extract specific values using the pattern method.
+The main idea comes from python and how uses its strings.
 # Methods 
 
 
